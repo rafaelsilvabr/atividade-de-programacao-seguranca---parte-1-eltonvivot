@@ -51,7 +51,7 @@ class IoTServer(iot_service_pb2_grpc.IoTServiceServicer):
 
         print ("Blink led ", ledname)
         print ("...with state ", state)
-        produce_led_command(state, ledname)
+        produce_led_command(int(state), ledname)
         # Update led state of twin
         led_state[request.ledname] = state
         return iot_service_pb2.LedReply(ledstate=led_state)
