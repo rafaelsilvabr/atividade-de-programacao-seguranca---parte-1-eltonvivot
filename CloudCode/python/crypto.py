@@ -1,5 +1,5 @@
 from cryptography.fernet import Fernet
-import json
+import json, const
 
 def read_write_json(data: dict = None, filename="credentials.json") -> dict:
     if data is None:
@@ -33,17 +33,9 @@ def user_login(login, password):
 def generate_key():
   return Fernet.generate_key()
 
-def encrypt(message: bytes, key: bytes) -> bytes:
+def encrypt(message: bytes, key: bytes = const.FERNET_KEY) -> bytes:
     return Fernet(key).encrypt(message)
 
-def decrypt(token: bytes, key: bytes) -> bytes:
+def decrypt(token: bytes, key: bytes = const.FERNET_KEY) -> bytes:
     return Fernet(key).decrypt(token)
-
-def decrypt_middleware(message: str, key: bytes):
-  decrypt_msg = decrypt(message, key)
-  return json.loads(decrypt_msg.decode())
-
-def encrypt_middleware(message: dict, key: bytes):
-  message_str = json.dumps(message)
-  return encrypt(message_str.encode(), key)
 
