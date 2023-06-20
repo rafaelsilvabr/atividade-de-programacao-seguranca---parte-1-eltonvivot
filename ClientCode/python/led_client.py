@@ -20,7 +20,7 @@ def run():
         password = crypto.encrypt(sys.argv[4])
 
         stub = iot_service_pb2_grpc.IoTServiceStub (channel)
-        response = stub.BlinkLed(iot_service_pb2.LedRequest(state=state),ledname=ledname, login=login, password=password)
+        response = stub.BlinkLed(iot_service_pb2.LedRequest(state=state,ledname=ledname, login=login, password=password))
 
     if response.ledstate[ledname] == 1:
         print("Led state is on")
