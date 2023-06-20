@@ -14,7 +14,7 @@ from const import *
 def run():
     with grpc.insecure_channel(GRPC_SERVER+':'+GRPC_PORT) as channel:
         
-        state = crypto.encrypt(int(sys.argv[1]))
+        state = crypto.encrypt(sys.argv[1])
         ledname = crypto.encrypt(ledname=sys.argv[2])
         login = crypto.encrypt(ledname=sys.argv[3])
         password = crypto.encrypt(ledname=sys.argv[4])
